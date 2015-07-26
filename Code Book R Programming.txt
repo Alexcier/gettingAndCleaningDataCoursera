@@ -1,6 +1,7 @@
 ﻿Code Book
 
-This Document Provides information in regards to the associated run_analysis.R script, the “human activity recognition using smartphones” dataset and the datasets derived from it
+This Document Provides information in regards to the associated run_analysis.R script, the “human activity
+recognition using smartphones” dataset and the datasets derived from it
 
 Original Datasets
 Acquired from: 
@@ -8,8 +9,14 @@ https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Datas
 With an explanation of the dataset provided at:
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 Brief Summary
-This dataset focuses around a group of 30 volunteers within the age bracket of 19-48 years old, each of whom had six activities tracked (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) by wearing a smart phone (Samsung Galaxy S2) around their waist.
-The dataset has been partitioned into a training (70%) and test set (30%). Feedback on these various activities is given by the available signal sensors and preprocessed by applying noise filters and sampled using a fixed-width sliding window of 2.56 seconds with a 50% overlap. A Butterworth low-pass filter was used to seperate the body acceleration and gravity with a 0.3Hz cutoff filter applied for the gravitational effect. From each window a vector of features were obtained by calculating variables from the time and frequency domain.
+This dataset focuses around a group of 30 volunteers within the age bracket of 19-48 years old, each of whom had
+six activities tracked (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) by wearing a
+smart phone (Samsung Galaxy S2) around their waist.
+The dataset has been partitioned into a training (70%) and test set (30%). Feedback on these various activities is
+given by the available signal sensors and preprocessed by applying noise filters and sampled using a fixed-width
+sliding window of 2.56 seconds with a 50% overlap. A Butterworth low-pass filter was used to seperate the body
+acceleration and gravity with a 0.3Hz cutoff filter applied for the gravitational effect. From each window a vector
+of features were obtained by calculating variables from the time and frequency domain.
 
 Attribute Information:
 For each record in the dataset it is provided:
@@ -22,42 +29,57 @@ For each record in the dataset it is provided:
 Data Used
 It was decided that the following data would be used from the available datasets
 UCI HAR Dataset
-Both the “activity_labels” and “features” dataset were used in order to extract the textual/descriptive information available and import it into the test and training datasets.
+Both the “activity_labels” and “features” dataset were used in order to extract the textual/descriptive information
+available and import it into the test and training datasets.
 TEST
-from the test data folder subject_test, X_test and y_test would be used. The ineratial signals files were omitted as it was felt they were not relevant to the project and did not provide mean/standard deviation orientated data.
+from the test data folder subject_test, X_test and y_test would be used. The ineratial signals files were omitted
+as it was felt they were not relevant to the project and did not provide mean/standard deviation orientated data.
 TRAIN
-from the train data folder subject_test, X_test and y_test would be used. The ineratial signals files were omitted as it was felt they were not relevant to the project and did not provide mean/standard deviation orientated data.
+from the train data folder subject_test, X_test and y_test would be used. The ineratial signals files were omitted
+as it was felt they were not relevant to the project and did not provide mean/standard deviation orientated data.
 
 Transformations
-The relevant training and test datasets were first combined (X_train and X_test became rbindDataX;  Y_train and Y_test became rbindDataY; similiarly subject_train and subject_test became rbindDataSubject)
+The relevant training and test datasets were first combined (X_train and X_test became rbindDataX;  Y_train and
+Y_test became rbindDataY; similiarly subject_train and subject_test became rbindDataSubject)
 
 Features and rbindDataX transformations
 From the features dataset only mean and standard deviation orientated variables were extracted
-These selected variables were then added to the rbindDataX dataframe, removing all instances of variables that were not part of this set.
+These selected variables were then added to the rbindDataX dataframe, removing all instances of variables that were
+not part of this set.
 Some basic data cleansing occured removing non-alphanumeric characters [-()]
 Next the case of the headings/attribute names were dropped to lower
-Then all instances of mean and standard deviation (denoted as “mean” and “std”) were changed to uppercase and enclosed in underscore characters to make the specific variable easier to identify
+Then all instances of mean and standard deviation (denoted as “mean” and “std”) were changed to uppercase and
+enclosed in underscore characters to make the specific variable easier to identify
 
 Activity and rBindDataY Transformations
 The activity dataset firstly had a number of underscore characters (_) remove.
-Secondly the labels containing the activity name (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) were changed to lowercase
-Next for the  WALKING_UPSTAIRS and WALKING_DOWNSTAIRS variables the beginning of the second word was placed into uppercase in order to quickly distinquish the words from one another.
+Secondly the labels containing the activity name (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING,
+LAYING) were changed to lowercase
+Next for the  WALKING_UPSTAIRS and WALKING_DOWNSTAIRS variables the beginning of the second word was placed into
+uppercase in order to quickly distinquish the words from one another.
 These labels were then further added to the rBindDataY dataset in place of the previous numeric figures.
 RbindDataSubject
 The names of this variable was changed to “subject”
 MergedData
 This dataset was creating by column binding rbindDataSubject, rbindDataY and rbindDataX together.
 MergeredDataAverages
-This dataset was derived from the mergedData dataset and combines all instances of a specific combination of both subject and activity into a single, averaged variable.
+This dataset was derived from the mergedData dataset and combines all instances of a specific combination of both
+subject and activity into a single, averaged variable.
 
 Final Dataset
-The final datasets comprise two related dataframes, one simply averaging the results of another. The first “merged data” combines the three aforementioned datasets into a single succinct one, which has only kept variable/attribute data regarding the mean and standard deviation orientated variables.
-The unique identifiers for each observation are a mixture of both the “subject” and the “activity” variables. The remainder of the variables denote the vectorised results from the experiment. As mentioned, the second dataset, “Merged_Data_Averages”, is simply a summarisation of the above dataset with the vectorised result from the experiment in regards to mean and standard deviation averaged.
+The final datasets comprise two related dataframes, one simply averaging the results of another. The first “merged
+data” combines the three aforementioned datasets into a single succinct one, which has only kept variable/attribute
+data regarding the mean and standard deviation orientated variables.
+The unique identifiers for each observation are a mixture of both the “subject” and the “activity” variables. The
+remainder of the variables denote the vectorised results from the experiment. As mentioned, the second dataset,
+“Merged_Data_Averages”, is simply a summarisation of the above dataset with the vectorised result from the
+experiment in regards to mean and standard deviation averaged.
 
 Variables in final datasets
 Subject
 This variable relates to person observed during this experiment with an arbitrary numbering of 1-30
 Activity
-This variable concerns the specific activity that a subject was engaged in with (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) 
+This variable concerns the specific activity that a subject was engaged in with (WALKING, WALKING_UPSTAIRS,
+WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) 
 tbodyacc_MEAN_x  -	fbodybodygyrojerkmag_STD_
 These variables concern the vectorised results derived from the experiment and are as such, numeric.
